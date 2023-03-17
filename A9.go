@@ -162,19 +162,6 @@ func getEnv(s []string, l []Value, env []Binding) []Binding {
 }
 
 func main() {
-	testExprC1 := appC{fun: idC{s: "+"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	testExprC2 := appC{fun: idC{s: "-"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	testExprC3 := appC{fun: idC{s: "/"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	testExprC4 := appC{fun: idC{s: "*"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	testExprC5 := appC{fun: idC{s: "=="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	testExprC6 := appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	testExprC7 := appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 5}, numC{n: 4}}}
-	fmt.Println(`appC{idC{"+"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC1, topEnv))
-	fmt.Println(`appC{idC{"-"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC2, topEnv))
-	fmt.Println(`appC{idC{"/"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC3, topEnv))
-	fmt.Println(`appC{idC{"*"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC4, topEnv))
-	fmt.Println(`appC{idC{"=="}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC5, topEnv))
-	fmt.Println(`appC{idC{"<="}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC6, topEnv))
-	fmt.Println(`appC{idC{"<="}, []{{numC{n: 5}, numC{n: 4}} is : `, interp(testExprC7, topEnv))
+	
 
 }
