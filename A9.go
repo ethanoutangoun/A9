@@ -172,6 +172,7 @@ func main() {
 	testExprC5 := appC{fun: idC{s: "=="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
 	testExprC6 := appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
 	testExprC7 := appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 5}, numC{n: 4}}}
+	testExprC8 := ifC{ifExpr: appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 4}, numC{n: 5}}}, thenExpr: numC{n: 4}, elseExpr: numC{n: 5}}
 	fmt.Println(`appC{idC{"+"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC1, topEnv))
 	fmt.Println(`appC{idC{"-"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC2, topEnv))
 	fmt.Println(`appC{idC{"/"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC3, topEnv))
@@ -179,5 +180,6 @@ func main() {
 	fmt.Println(`appC{idC{"=="}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC5, topEnv))
 	fmt.Println(`appC{idC{"<="}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC6, topEnv))
 	fmt.Println(`appC{idC{"<="}, []{{numC{n: 5}, numC{n: 4}} is : `, interp(testExprC7, topEnv))
+	fmt.Println(`ifC{ifExpr: appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 4}, numC{n: 5}}}, thenExpr: numC{n: 4}, elseExpr: numC{n: 5}} is : `, interp(testExprC8, topEnv))
 
 }
