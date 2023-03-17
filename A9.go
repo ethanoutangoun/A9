@@ -2,7 +2,7 @@ package main
 
 import (
 	"errors"
-	
+	"fmt"
 )
 
 type ExprC interface{}
@@ -122,31 +122,34 @@ func lookup(forName string, environment []Binding) Value {
 }
 
 func getBinop(op Value, l Value, r Value) Value {
+	if !(isReal(l) && isReal(r)) {
+		panic("Binop left or right value are not numbers")
+	}
 	switch op := op.(type) {
 	case string:
-		if op == "+" && isReal(l) && isReal(r) {
+		if op == "+" {
 			return l.(float64) + r.(float64)
 		}
-		if op == "-" && isReal(l) && isReal(r) {
+		if op == "-" {
 			return l.(float64) - r.(float64)
 		}
-		if op == "*" && isReal(l) && isReal(r) {
+		if op == "*" {
 			return l.(float64) * r.(float64)
 		}
-		if op == "/" && isReal(l) && isReal(r) {
+		if op == "/" {
 			if r.(float64) == 0 {
 				panic("division by zero")
 			}
 			return l.(float64) / r.(float64)
 		}
-		if op == "<=" && isReal(l) && isReal(r) {
+		if op == "<=" {
 			return l.(float64) <= r.(float64)
 		}
-		if op == "==" && isReal(l) && isReal(r) {
+		if op == "==" {
 			return l.(float64) == r.(float64)
 		}
 	}
-	panic("Invalid binop syntax")
+	panic("Invalid Binop Syntax")
 }
 
 func isReal(x Value) bool {
@@ -162,6 +165,19 @@ func getEnv(s []string, l []Value, env []Binding) []Binding {
 }
 
 func main() {
-	
+	testExprC1 := appC{fun: idC{s: "+"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC2 := appC{fun: idC{s: "-"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC3 := appC{fun: idC{s: "/"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC4 := appC{fun: idC{s: "*"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC5 := appC{fun: idC{s: "=="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC6 := appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC7 := appC{fun: idC{s: "<="}, args: []ExprC{numC{n: 5}, numC{n: 4}}}
+	fmt.Println(`appC{idC{"+"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC1, topEnv))
+	fmt.Println(`appC{idC{"-"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC2, topEnv))
+	fmt.Println(`appC{idC{"/"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC3, topEnv))
+	fmt.Println(`appC{idC{"*"}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC4, topEnv))
+	fmt.Println(`appC{idC{"=="}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC5, topEnv))
+	fmt.Println(`appC{idC{"<="}, []{{numC{n: 3}, numC{n: 4}} is : `, interp(testExprC6, topEnv))
+	fmt.Println(`appC{idC{"<="}, []{{numC{n: 5}, numC{n: 4}} is : `, interp(testExprC7, topEnv))
 
 }
