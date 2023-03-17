@@ -162,5 +162,5 @@ func main() {
 	fmt.Println("hello world")
 	testExprC := appC{fun: idC{s: "+"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
 	fmt.Println(interp(testExprC, topEnv))
-
+    fmt.Println(interp(numC{n : 2}, topEnv))
 }
