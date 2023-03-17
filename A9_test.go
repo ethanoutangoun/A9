@@ -19,7 +19,7 @@ func TestInterpId(t *testing.T) {
 	result := interp(IdC{S: "x"}, []Binding{{Name: "y", Val: NumV{N: 4}},
 		{Name: "x", Val: NumV{N: 2}}})
 	if (result != NumV{N: 2}) {
-		t.Errorf("Expected NumV(2)")
+		t.Errorf("Expected StrV{"hello"}")
 	}
 
 }
