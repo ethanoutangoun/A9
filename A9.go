@@ -159,8 +159,13 @@ func getEnv(s []string, l []Value, env []Binding) []Binding {
 }
 
 func main() {
-	fmt.Println("hello world")
-	testExprC := appC{fun: idC{s: "+"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
-	fmt.Println(interp(testExprC, topEnv))
+	testExprC1 := appC{fun: idC{s: "+"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC2 := appC{fun: idC{s: "-"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC3 := appC{fun: idC{s: "/"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC4 := appC{fun: idC{s: "*"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	fmt.Println(interp(testExprC1, topEnv))
+	fmt.Println(interp(testExprC2, topEnv))
+	fmt.Println(interp(testExprC3, topEnv))
+	fmt.Println(interp(testExprC4, topEnv))
 
 }
