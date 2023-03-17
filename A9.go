@@ -95,8 +95,8 @@ func interp(e ExprC, environment []Binding) Value {
 				return getBinop("/", fArgs[0], fArgs[1])
 			case "<=":
 				return getBinop("<=", fArgs[0], fArgs[1])
-			case "equal?":
-				return getBinop("equal?", fArgs[0], fArgs[1])
+			case "==":
+				return getBinop("==", fArgs[0], fArgs[1])
 			default:
 				return errors.New("Error in interp AppC")
 			}
@@ -142,6 +142,9 @@ func getBinop(op Value, l Value, r Value) Value {
 		if op == "<=" && isReal(l) && isReal(r) {
 			return l.(float64) <= r.(float64)
 		}
+		if op == "==" && isReal(l) && isReal(r) {
+			return l.(float64) == r.(float64)
+		}
 	}
 	panic("Invalid binop syntax")
 }
@@ -163,9 +166,11 @@ func main() {
 	testExprC2 := appC{fun: idC{s: "-"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
 	testExprC3 := appC{fun: idC{s: "/"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
 	testExprC4 := appC{fun: idC{s: "*"}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
+	testExprC5 := appC{fun: idC{s: "=="}, args: []ExprC{numC{n: 3}, numC{n: 4}}}
 	fmt.Println(interp(testExprC1, topEnv))
 	fmt.Println(interp(testExprC2, topEnv))
 	fmt.Println(interp(testExprC3, topEnv))
 	fmt.Println(interp(testExprC4, topEnv))
+	fmt.Println(interp(testExprC5, topEnv))
 
 }
